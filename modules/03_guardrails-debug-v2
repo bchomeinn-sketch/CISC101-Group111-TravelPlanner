@@ -1,0 +1,85 @@
+Refined Module 2
+
+Module 2 — Plan Builder (Options → Days)
+Purpose
+Generate daily itineraries by selecting candidate activities (attractions, restaurants, parks, events) into structured time blocks. Ensure clarity, feasibility, and robustness by applying proximity thresholds, time windows, budget checks, and fallback logic.
+
+Inputs
+Lodging info: Address/coordinates, check-in/out times.
+
+Candidate activities: Structured list with type, location, hours, duration, cost range, tags, weather suitability, reservation requirements.
+
+User constraints: Budget per day, interests, dietary needs, accessibility, transport mode, pace preference.
+
+System context: Date range, timezone, weather forecast, holidays.
+
+Activity Schema
+Type: Attraction, park, restaurant, event.
+
+Estimated duration: Min/max in minutes.
+
+Cost range: Free, , $, $$$ mapped to numeric ranges.
+
+Distance: Computed from lodging or previous stop.
+
+Hours: Open/close times, closed days.
+
+Tags: Theme (art, food, nature), indoor/outdoor, kid-friendly, accessible.
+
+Weather suitability: Indoor/outdoor preference.
+
+Requirements: Reservation, ticket, dress code.
+
+Selection Logic
+Time Blocks
+Morning: 9:00–12:00
+
+Midday: 12:00–15:00
+
+Afternoon: 15:00–18:00
+
+Evening: 18:00–21:00
+
+Proximity Thresholds
+Morning: ≤ 1 mile or ≤ 20 min transit from lodging.
+
+Midday: ≤ 1 mile or ≤ 20 min transit from Morning activity.
+
+Afternoon: Different theme than Midday; feasible travel time.
+
+Evening: Restaurant or event near Afternoon or lodging; dietary/accessibility compliant.
+
+Feasibility Checks
+Activity open during block.
+
+Duration fits block window.
+
+Travel time feasible.
+
+Budget tracked cumulatively.
+
+Weather suitability confirmed.
+
+Fallback & Backup Logic
+Missing data: Use defaults (e.g., 60–90 min duration, $$ cost).
+
+Weather issues: Prefer indoor activities.
+
+Budget limits: Select free/low-cost options.
+
+Insufficient nearby options: Expand radius progressively.
+
+Closed venues: Swap with backup option.
+
+Reservations unavailable: Suggest alternates.
+
+Output Format
+Each day plan includes:
+
+Morning, Midday, Afternoon, Evening activity: Name, type, time window, duration, cost estimate, distance, travel time, notes (dietary, accessibility, weather).
+
+Backup option per block.
+
+Daily totals: Cost, travel time, walking distance.
+
+Special notes: Dietary, accessibility, reservations.
